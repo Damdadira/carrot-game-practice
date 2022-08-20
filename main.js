@@ -82,6 +82,7 @@ function showStopButton() {
   const icon = gameBtn.querySelector('.fas');
   icon.classList.add('fa-stop');
   icon.classList.remove('fa-play');
+  gameBtn.style.visibility = 'visible'; //hideGameButton에서 버튼 숨겼기 때문에 다시 시작하려면 버튼 보여줘야함
 }
 
 function hideGameButton() {

@@ -6,6 +6,7 @@ button {
 
 body {
   text-align: center;
+  background-color: black;
 }
 
 .game {
@@ -47,6 +48,8 @@ body {
   font-size: 32px;
   margin-top: 8px;
   visibility: hidden; /*처음에는 숨기겠다*/
+  user-select: none; /*선택되지 않도록*/
+  cursor: auto; /*선택되지 않도록*/
 }
 
 .game__score {
@@ -54,13 +57,15 @@ body {
   width: 50px;
   height: 50px;
   margin-top: 8px;
-  font-size: 46px;
+  font-size: 38px;
   border-radius: 50%;
   border: 3px solid black;
   line-height: 100%;
   background-color: darksalmon;
   color: white;
   visibility: hidden; /*처음에는 숨기겠다*/
+  user-select: none; /*선택되지 않도록*/
+  cursor: auto; /*선택되지 않도록*/
 }
 
 .game__field {
@@ -100,4 +105,14 @@ body {
 .pop-up__message {
   display: block;
   font-size: 38px;
+}
+
+.carrot,
+bug {
+  transition: transform 100ms ease-in;
+}
+
+.carrot:hover,
+.bug:hover {
+  transform: scale(1.1);
 }
