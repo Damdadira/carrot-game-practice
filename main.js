@@ -11,6 +11,10 @@ const gameBtn = document.querySelector('.game__button');
 const gameTimer = document.querySelector('.game__timer');
 const gameScore = document.querySelector('.game__score');
 
+const popUp = document.querySelector('.pop-up');
+const popUpText = document.querySelector('.pop-up__message');
+const popUpRefresh = document.querySelector('.pop-up__refresh');
+
 let started = false;
 let score = 0;
 let timer = undefined;
@@ -37,13 +41,21 @@ function showTimerAndScore() {
   gameScore.style.visibility = 'visible';
 }
 
-function stopGame() {}
+function stopGame() {
+  stopGameTimer();
+  hideGameButton();
+  showPopupWithText('REPLAY');
+}
 
 function showStopButton() {
   //gameBtn 세모냐 네모냐
   const icon = gameBtn.querySelector('.fa-play');
   icon.classList.add('fa-stop');
   icon.classList.remove('fa-play');
+}
+
+function hideGameButton() {
+  gameBtn.style.visibility = 'hidden';
 }
 
 function startGameTimer() {
@@ -60,10 +72,19 @@ function startGameTimer() {
   }, 1000); //1초
 }
 
+function stopGameTimer() {
+  clearInterval(timer);
+}
+
 function updateTimerText(time) {
   const minutes = Math.floor(time / 60); //floor->소수를 정수로 만들어줌
   const secondes = time % 60;
   gameTimer.innerHTML = `${minutes}:${secondes}`;
+}
+
+function showPopupWithText(text) {
+  popUpText.innerHTML = text;
+  popUp.classList.remove('pop-up--hide'); //css에서 hide해놔서 클래스를 제거해야 보임
 }
 
 function initGame() {
