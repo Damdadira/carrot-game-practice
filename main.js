@@ -3,6 +3,7 @@
 const CARROT_SIZE = 80;
 const CARROT_COUNT = 5;
 const BUG_COUNT = 5;
+const GAME_DURATION_SEC = 5; //5초
 
 const field = document.querySelector('.game__field');
 const fieldRect = field.getBoundingClientRect();
@@ -43,6 +44,26 @@ function showStopButton() {
   const icon = gameBtn.querySelector('.fa-play');
   icon.classList.add('fa-stop');
   icon.classList.remove('fa-play');
+}
+
+function startGameTimer() {
+  let remainingTimeSec = GAME_DURATION_SEC; //5초동안 유지하겠다
+  updateTimerText(remainingTimeSec); //시작하기 전에 업데이트 하는 용도(5초부터 시작해 하나하나 줄여가겠다)
+  timer = setInterval(() => {
+    if (remainingTimeSec <= 0) {
+      //0초와 같거나 작다면 타이머 중지
+      clearInterval(timer);
+      return;
+    }
+    //0초가 아니라 게임이 계속 돌아가고 있다면
+    updateTimerText(--remainingTimeSec); //하나하나씩 줄이겠다
+  }, 1000); //1초
+}
+
+function updateTimerText(time) {
+  const minutes = Math.floor(time / 60); //floor->소수를 정수로 만들어줌
+  const secondes = time % 60;
+  gameTimer.innerHTML = `${minutes}:${secondes}`;
 }
 
 function initGame() {
