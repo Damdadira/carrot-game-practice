@@ -15,6 +15,12 @@ const popUp = document.querySelector('.pop-up');
 const popUpText = document.querySelector('.pop-up__message');
 const popUpRefresh = document.querySelector('.pop-up__refresh');
 
+const carrotSound = new Audio('./sound/carrot_pull.mp3');
+const alertSound = new Audio('./sound/alert.wav');
+const bgSound = new Audio('./sound/bg.mp3');
+const bugSound = new Audio('./sound/bug_pull.mp3');
+const winSound = new Audio('./sound/game_win.mp3');
+
 let started = false;
 let score = 0;
 let timer = undefined;
@@ -41,6 +47,7 @@ function startGame() {
   showStopButton(); //게임 시작 버튼 아이콘 변경
   showTimerAndScore(); //timer와 score 평소에는 안보이다가 시작하면 보이게
   startGameTimer(); //시작버튼을 누르면 타이머가 작동하도록
+  playSound(bgSound);
 }
 
 function stopGame() {
@@ -48,11 +55,20 @@ function stopGame() {
   stopGameTimer();
   hideGameButton();
   showPopupWithText('REPLAY');
+  playSound(alertSound);
+  stopSound(bgSound);
 }
 
 function finishGame(win) {
   started = false;
   hideGameButton();
+  if (win) {
+    playSound(winSound);
+  } else {
+    playSound(bugSound);
+  }
+  stopGameTimer();
+  stopSound(bgSound);
   showPopupWithText(win ? 'YOU WON' : 'YOU LOST');
 }
 
@@ -107,6 +123,7 @@ function hidePupUp() {
 }
 
 function initGame() {
+  score = 0; //score 항상 0으로 초기화
   field.innerHTML = ''; //reset될때마다 이미지의 숫자가 늘어나지 않도록 초기화
   gameScore.innerHTML = CARROT_COUNT; //gameScore의 값은 당근만큼
   //벌레와 당근을 생성한뒤 field에 추가해줌
@@ -126,6 +143,7 @@ function onFieldClick(event) {
     //당근!!
     target.remove(); //클릭한 것은 없애고, 스코어 점수 올리기
     score++;
+    playSound(carrotSound);
     updateScoreBoard(); //화면상에도 업데이트하려면
     if (score == CARROT_COUNT) {
       //score == 당근의 개수가 같다면 게임이 끝나야함
@@ -133,9 +151,17 @@ function onFieldClick(event) {
     }
   } else if (target.matches('.bug')) {
     //벌레!!
-    stopGameTimer();
     finishGame(false); //졌다
   }
+}
+
+function playSound(sound) {
+  sound.currentTime = 0;
+  sound.play();
+}
+
+function stopSound(sound) {
+  sound.pause(); //그만
 }
 
 function updateScoreBoard() {
