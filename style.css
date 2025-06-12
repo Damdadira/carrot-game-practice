@@ -17,6 +17,7 @@ body {
   margin: auto;
   background: url(img/background.png) center/cover;
   border-radius: 20px;
+  user-select: none;
 }
 
 .game__header {
