@@ -34,7 +34,7 @@
 <br/>
 
 <details>
- <summary><h3 style="display:inline; margin-left:4px">3️⃣ 재시작 화면</h3></summary>
+ <summary><h3 style="display:inline; margin-left:4px">3️⃣ 일시 정지 화면</h3></summary>
  <h4>📷 이미지</h4>
  <img src="/img/carrot_game/img_carrot_replay.png" />
  <h4>📽 동영상</h4>
