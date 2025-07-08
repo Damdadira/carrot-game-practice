@@ -14,7 +14,7 @@
 - 게임을 **다시 시작**할 때마다 **당근과 벌레의 위치는 무작위**로 배치됩니다.
 <br/>
 
-## 💡 화면 구성
+## 🖥 화면 구성
 <details>
  <summary><h3 style="display:inline; margin-left:4px">1️⃣ 승리 화면</h3></summary>
  <h4>📷 이미지</h4>
